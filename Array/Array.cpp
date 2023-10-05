@@ -1,9 +1,10 @@
 #include <iostream>
+#include <utility>
 #include "Array.h"
 
 template <typename T,size_t size>
 void printArray(const Array<T,size>& arr){
-    for(size_t i{0};i < size;++i){
+    for(size_t i{0};i < arr.Size();++i){
         std::cout<<arr[i]<<' ';
     }
 
@@ -52,6 +53,27 @@ int main(){
     std::cout<<"\nAfter call to member function fill,ar6 is:\n";
     arr6.fill(22);
     printArray(arr6);
+
+    std::cout<<"\n\nTesting move constructor\n:";
+    std::cout<<"Array6:\n";
+    printArray(arr6);
+
+    Array<int,size3> arr7{std::move(arr6)};
+    std::cout<<"\nAfter Array<int,size3> arr7{std::move(arr6)},"
+            <<"arr6 contains:\n";
+            printArray(arr6);
+    std::cout<<"\narr7 contains:\n";
+    printArray(arr7);
+    
+
+    std::cout<<"\n\nTetsting move assignment operator:\n";
+    Array<int,size3> arr8;
+    arr8 = std::move(arr7);
+    std::cout<<"\narr7 after\n"
+            <<"arr8 = std::move(arr7):";
+            printArray(arr7);
+    std::cout<<"\narr8:\n";
+    printArray(arr8);
 
     return 0;    
 }

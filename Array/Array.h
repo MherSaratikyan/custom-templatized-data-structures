@@ -35,6 +35,13 @@ public:
         }
     }
 
+    //move ctor
+    Array<T,size>(Array<T,size>&& rhs): m_size{rhs.m_size} {
+        this->m_arr = rhs.m_arr;
+        rhs.m_size = 0;
+        rhs.m_arr = nullptr;
+    }
+
     //dtor
     ~Array<T,size>(){
         delete[] m_arr;
@@ -47,6 +54,19 @@ public:
             for(size_t i{0};i < size;++i){
                 m_arr[i] = rhs.m_arr[i];
             }
+        }
+
+        return *this;
+    }
+
+    //move = operator
+    const Array<T,size>& operator=(Array<T,size>&& rhs){
+        if(this != &rhs){
+            delete[] this->m_arr;
+            this->m_size = rhs.m_size;
+            this->m_arr = rhs.m_arr;
+            rhs.m_size = 0;
+            rhs.m_arr = nullptr;
         }
 
         return *this;
