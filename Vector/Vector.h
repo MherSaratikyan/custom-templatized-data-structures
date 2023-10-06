@@ -33,6 +33,15 @@ public:
         }
     }
 
+     //move ctor
+    Vector<T>(Vector<T>&& rhs): v_size{rhs.v_size},v_capacity{rhs.v_capacity} {
+        this->arr = rhs.arr;
+        rhs.v_size = 0;
+        rhs.v_capacity = 0;
+        rhs.arr = nullptr;
+        
+    }
+
     //copy operator=
     const Vector<T>& operator=(const Vector<T>& rhs){
         if(this != &rhs){
@@ -45,6 +54,22 @@ public:
             for(size_t i{0};i < rhs.v_size;++i){
                 arr[i] = rhs.arr[i];
             }
+        }
+
+        return *this;
+    }
+
+    //move operator=
+    const Vector<T>& operator=(Vector<T>&& rhs){
+        if(this != &rhs){
+            this->v_capacity = rhs.v_capacity;
+            rhs.v_capacity = 0;
+
+            this->v_size = rhs.v_size;
+            rhs.v_size = 0;
+
+            this->arr = rhs.arr;
+            rhs.arr = nullptr;
         }
 
         return *this;

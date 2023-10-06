@@ -37,6 +37,28 @@ int main(){
     std::cout<<"\nv5:";
     infoAboutVec(v5);
 
+    std::cout<<"\nTseting move constructor:";
+    std::cout<<"\nVector v5:";
+    infoAboutVec(v5);
 
+    Vector<int> v6(std::move(v5));
 
+    std::cout<<"\nVector v6:";
+    infoAboutVec(v6);
+
+    std::cout<<"\nMoved-from v5:";
+    infoAboutVec(v5);
+
+    std::cout<<"\n\nTesting move assignment:\n";
+    Vector<int> v7;
+    std::cout<<"Newly created v7:";
+    infoAboutVec(v7);
+
+    v7 = std::move(v6);
+
+    std::cout<<"\nVector v7 after assigning to it v6:";
+    infoAboutVec(v7);
+
+    std::cout<<"\nNew state of Vector v6:";
+    infoAboutVec(v6);
 }
