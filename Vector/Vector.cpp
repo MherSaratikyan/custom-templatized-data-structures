@@ -3,11 +3,11 @@
 
 template <typename T>
 void infoAboutVec(const Vector<T>& v){
-    std::cout<<"\nsize: "<<v.Size()
-            <<"\ncapacity: "<<v.Capacity()
+    std::cout<<"\nsize: "<<v.getSize()
+            <<"\ncapacity: "<<v.getCapacity()
             <<"\nis empty: "<<(v.empty() ? "true" : "false")
             <<"\nElements: ";
-            for(size_t i{0};i < v.Size();++i){
+            for(size_t i{0};i < v.getSize();++i){
                 std::cout<<v[i]<<' ';
             }
 }
@@ -61,4 +61,12 @@ int main(){
 
     std::cout<<"\nNew state of Vector v6:";
     infoAboutVec(v6);
+
+    v7.insert(4,33);
+    std::cout<<"\nVector v7 after inserting 33 at index 4:";
+    infoAboutVec(v7);
+
+    v7.remove(4);
+    std::cout<<"\nVector v7 after removing element in from the index 4:";
+    infoAboutVec(v7);
 }

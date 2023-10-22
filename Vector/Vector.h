@@ -2,6 +2,7 @@
 #define VECTOR_H
 #include <stdexcept>
 #include <initializer_list>
+#include <cstdlib>
 
 template<typename T>
 class Vector{
@@ -47,8 +48,9 @@ public:
         if(this != &rhs){
             if(v_capacity < rhs.v_size){
                 v_size = v_capacity = rhs.v_size;
-                delete[] arr;
+                T* pOrig = arr;
                 arr = new T[v_size];
+                delete[] pOrig;
             }
 
             for(size_t i{0};i < rhs.v_size;++i){
@@ -130,26 +132,55 @@ public:
         return true;
     }
 
-    void insert(int pos){
-        if(pos < 0 || pos >= v_size){
+    void insert(std::size_t index,const T& value){
+        if(index < 0 || index >= getSize()){
             throw std::out_of_range("Subscript out of range");
         }
 
+        if(v_size == v_capacity){
+            v_capacity = (v_capacity) ? 2 * v_capacity : 1;
+            T* tmp = new T[v_capacity];
+            for(int i{0};i < v_size;++i){
+                tmp[i] = arr[i];
+            }
+
+            delete[] arr;
+            arr = tmp;
+        }
+        
+        for(int j = v_size;j >= index;--j){
+            arr[j] = arr[j - 1];
+        }
+
+        arr[index] = value;
+        ++v_size;
         
     }
 
+    void remove(std::size_t index){
+        if(index < 0 && index >= v_size){
+            throw std::out_of_range("Subscript out of range");
+        }
+
+        for(int j = index;j < v_size - 1;++j){
+            arr[j] = arr[j + 1];
+        }
+        --v_size;
+    }
 
     bool empty() const{
         return (v_size == 0);
     }
     
-    size_t Size() const{
+    size_t getSize() const{
         return v_size;
     }
 
-    size_t Capacity() const{
+    size_t getCapacity() const{
         return v_capacity;
     }
+
+    
 private:
     size_t v_size;
     size_t v_capacity;
