@@ -45,9 +45,24 @@ int main(){
    myDLList.print();
 
    myDLList2 = myDLList;
-   std::cout<<"\nMy DLList2 con tains:\n";
+   std::cout<<"\nMy DLList2 contains:\n";
    myDLList2.print();
 
-  
+  std::cout<<"\n\nTesting move constructor\n";
+  std::cout<<"MyDLList2: ";
+  myDLList2.print();
+  DoublyLinkedList myDLList3(std::move(myDLList2));
+  std::cout<<"\nMyDLList3: ";
+  myDLList3.print();
+  std::cout<<"\nNew state of MyDLList2: ";
+  myDLList2.print();
+
+  std::cout<<"\n\nTesting move assignment operator\n";
+  myDLList2 = std::move(myDLList3);
+  std::cout<<"\nMyDLList2: ";
+  myDLList2.print();
+  std::cout<<"\nNew state of MyDLList3: ";
+  myDLList3.print();
+
 
 }

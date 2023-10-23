@@ -8,15 +8,35 @@ template <typename T>
 class DoublyLinkedList{
 public:
 
-    DoublyLinkedList<T>() = default;
+    DoublyLinkedList<T>(): first{nullptr}, last{nullptr}, size{0} {}
     DoublyLinkedList<T>(const DoublyLinkedList<T>& rhs){
         copy(rhs);
+    }
+
+    DoublyLinkedList<T>(DoublyLinkedList<T>&& rhs): first{rhs.first}, last{rhs.last}, size{rhs.size}{
+        rhs.first = nullptr;
+        rhs.last = nullptr;
+        rhs.size = 0;
     }
 
     const DoublyLinkedList<T>& operator=(const DoublyLinkedList<T>& rhs){
         if(this != &rhs){
             cleanUp();
             copy(rhs);
+        }
+
+        return *this;
+    }
+
+    const DoublyLinkedList<T>& operator=(DoublyLinkedList<T>&& src){
+        if(this != &src){
+            cleanUp();
+            first = src.first;
+            src.first = nullptr;
+            last = src.last;
+            src.last = nullptr;
+            size = src.size;
+            src.size = 0;
         }
 
         return *this;
