@@ -37,4 +37,30 @@ int main(){
     myList3.push_front(16);
     std::cout<<"\nThe list mylist3 contains:\n";
     myList3.print();
+
+    std::cout<<"Testing insert and remove:\n";
+    std::cout<<"List: ";
+    myList3.print();
+    std::cout<<"Size: "<<myList3.getSize()<<'\n';
+    myList3.insert(66,2);
+    myList3.print();
+    std::cout<<"Size: "<<myList3.getSize()<<'\n';
+    myList3.remove(2);
+    myList3.print();
+
+    std::cout<<"\n\nTesting move constructor\n";
+    LinkedList<int> myList4(std::move(myList3));
+    std::cout<<"myList4: ";
+    myList4.print();
+    std::cout<<"\nNew state of myList3: ";
+    myList3.print();
+
+    std::cout<<"\n\nTesting move assignment\n";
+    LinkedList<int> myList5;
+    myList5 = std::move(myList4);
+    std::cout<<"myList5: ";
+    myList5.print();
+    std::cout<<"\nNew state of myList4: ";
+    myList3.print();
+    
 }

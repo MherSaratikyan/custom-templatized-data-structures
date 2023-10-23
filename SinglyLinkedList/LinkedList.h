@@ -14,6 +14,12 @@ public:
         copy(rhs);
     }
 
+    LinkedList<NODETYPE>(LinkedList<NODETYPE>&& rhs): first{rhs.first},last{rhs.last},size{rhs.size} {
+        rhs.first = nullptr;
+        rhs.last = nullptr;
+        rhs.size = 0;
+    }
+
     const LinkedList<NODETYPE>& operator=(const LinkedList<NODETYPE>& rhs){
         if(this != &rhs){
             cleanUp();
@@ -24,6 +30,21 @@ public:
         return *this;
     }
     
+    const LinkedList<NODETYPE>& operator=(LinkedList<NODETYPE>&& src){
+        if(this != &src){
+
+            cleanUp();
+            first = src.first;
+            src.first = nullptr;
+
+            last = src.last;
+            src.last = nullptr;
+
+            size = src.size;
+            src.size = 0;
+        }
+        return *this;
+    }
 
     bool isEmpty() const{
         return (nullptr == first);
@@ -117,11 +138,12 @@ public:
             tmp -> next = newNode;
             ++size;
         }
+            
             return true;
     }
 
     bool remove(size_t index){
-        if(index < 0 && index > size){
+        if(index < 0 || index > size){
             return false;
         }
 
@@ -141,7 +163,7 @@ public:
             delete rem;
             --size;
         }
-
+        
         return true;
     }
 
