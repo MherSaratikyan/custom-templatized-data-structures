@@ -37,8 +37,7 @@ public:
 
     //move ctor
     Array<T,size>(Array<T,size>&& rhs): m_size{rhs.m_size},m_arr{rhs.m_arr} {
-        rhs.m_size = 0;
-        rhs.m_arr = nullptr;
+        rhs.m_arr = new T[size];
     }
 
     //dtor
@@ -64,8 +63,8 @@ public:
             delete[] this->m_arr;
             this->m_size = rhs.m_size;
             this->m_arr = rhs.m_arr;
-            rhs.m_size = 0;
-            rhs.m_arr = nullptr;
+            
+            rhs.m_arr = new T[size];
         }
 
         return *this;
