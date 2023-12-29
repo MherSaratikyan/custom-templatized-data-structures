@@ -77,5 +77,21 @@ int main(){
         std::cout<<"\nException occured: "<<e.what();
     }
 
+    std::cout<<"\n\nTesting member functions related to the capacity and modifiers\n\n";
+    vector<double> vec_d;
+    printInfo(vec_d);
+    vec_d.reserve(10);
+    for(int i{0};i < 10;++i){
+        vec_d.push_back(3.14);
+    }
+    printInfo(vec_d);
+
+    for(int i{0}; i < 5; ++i){
+        vec_d.pop_back();
+    }
+
+    vec_d.insert(4, 2.71);
+    vec_d.shrink_to_fit();
+    printInfo(vec_d);
 
 }

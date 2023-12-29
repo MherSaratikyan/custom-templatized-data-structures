@@ -244,7 +244,7 @@ void vector<T>::insert(size_type pos, const T& value)
         realloc(2 * m_capacity);
     }
 
-    for(int i{m_size};i > pos; --i){
+    for(std::size_t i{m_size};i > pos; --i){
         m_vec[i] = m_vec[i - 1];
     }
 
