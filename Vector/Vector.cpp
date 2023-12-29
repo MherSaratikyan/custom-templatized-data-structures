@@ -98,7 +98,9 @@ void vector<T>::assign(size_type count, const T& value)
         realloc(count);
     }
     m_size = 0;
-    push_back(value);
+    for(int i = 0;i < count;++i){
+        m_vec[m_size++] = value;
+    }
 
 }
 
@@ -290,11 +292,13 @@ void vector<T>::realloc(size_type new_cap){
     }
 
     T* tmp = new T[new_cap];
+    
     for(int i{0};i < m_size; ++i){
         tmp[i] = m_vec[i];
     }
 
     delete[] m_vec;
+    m_capacity = new_cap;
     m_vec = tmp;
 }
 
