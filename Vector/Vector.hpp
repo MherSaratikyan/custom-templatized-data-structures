@@ -94,5 +94,5 @@ private:
     T* m_vec;
 };
 
-#include "Vector.cpp"
+#include "Vector.tpp"
 #endif
