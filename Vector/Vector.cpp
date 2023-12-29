@@ -14,7 +14,7 @@ template <typename T>
 vector<T>::vector(size_type count)
 : m_size{count}
 , m_capacity{count}
-, m_vec{new T[count]} 
+, m_vec{new T[count]{}} 
 {}
 
 template <typename T>
@@ -30,8 +30,11 @@ vector<T>::vector(size_type count, const T& value)
 
 template <typename T>
 vector<T>::vector(std::initializer_list<T> init)
+: m_size{0}
+, m_capacity{init.size()}
+, m_vec{new T[init.size()]}
 {
-    reserve(init.size());
+    
     for(const auto& elem : init){
         push_back(elem);
     }
@@ -43,9 +46,7 @@ vector<T>::vector(const vector<T>& other)
 , m_capacity{other.m_size}
 , m_vec{new T[other.m_size]}
 {
-    for(int i{0};i < m_size; ++i){
-        m_vec[i] = other.m_vec[i];
-    }
+    copy(other);
 }
 
 template <typename T>
@@ -295,6 +296,13 @@ void vector<T>::realloc(size_type new_cap){
 
     delete[] m_vec;
     m_vec = tmp;
+}
+
+template <typename T>
+void vector<T>::copy(const vector<T>& other){
+    for(int i{0};i < m_size; ++i){
+        m_vec[i] = other.m_vec[i];
+    }
 }
 
 #endif

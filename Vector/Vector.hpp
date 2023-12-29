@@ -84,6 +84,7 @@ public:
 
 //utility functions
 private:
+    void copy(const vector& other);
     void realloc(size_type new_cap);
 
 //data members
@@ -92,4 +93,6 @@ private:
     std::size_t m_capacity;
     T* m_vec;
 };
+
+#include "Vector.cpp"
 #endif
