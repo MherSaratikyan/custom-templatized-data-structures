@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Vector.hpp"
-
+#include <vector>
 
 template <typename T>
 void printInfo(const vector<T>& vec){
@@ -93,5 +93,13 @@ int main(){
     vec_d.insert(4, 2.71);
     vec_d.shrink_to_fit();
     printInfo(vec_d);
+
+    std::cout<<"\n\nTesting iterators\n\n";
+    vector<char> vec_it{'a','b','c','d','e','f','g','h'};
+    auto iter = vec_it.begin();
+    while(iter != vec_it.end()){
+        std::cout<<(*iter)<<' ';
+        ++iter;
+    }
 
 }
