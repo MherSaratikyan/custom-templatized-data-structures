@@ -314,14 +314,32 @@ void vector<T>::copy(const vector<T>& other)
 }
 
 template <typename T>
-typename vector<T>::vector_iterator vector<T>::begin()
-{
+typename vector<T>::const_vector_iterator vector<T>::begin() const{
+    return const_vector_iterator(m_vec);
+}
+
+template <typename T>
+typename vector<T>::const_vector_iterator vector<T>::end() const{
+    return const_vector_iterator(m_vec + m_size);
+}
+
+template <typename T>
+typename vector<T>::const_vector_iterator vector<T>::cbegin() const{
+    return const_vector_iterator(m_vec);
+}
+
+template <typename T>
+typename vector<T>::const_vector_iterator vector<T>::cend() const{
+    return const_vector_iterator(m_vec + m_size);
+}
+
+template <typename T>
+typename vector<T>::vector_iterator vector<T>::begin(){
     return vector_iterator(m_vec);
 }
 
 template <typename T>
-typename vector<T>::vector_iterator vector<T>::end()
-{
+typename vector<T>::vector_iterator vector<T>::end(){
     return vector_iterator(m_vec + m_size);
 }
 
