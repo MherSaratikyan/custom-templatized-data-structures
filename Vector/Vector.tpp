@@ -77,9 +77,11 @@ vector<T>& vector<T>::operator=(const vector<T>& other)
 template <typename T>
 vector<T>& vector<T>::operator=(vector<T>&& other) noexcept
 {
-    m_size = std::exchange(other.m_size, 0);
-    m_capacity = std::exchange(other.m_capacity, 0);
-    m_vec = std::exchange(other.m_vec, nullptr);
+    if(this != &other){
+        m_size = std::exchange(other.m_size, 0);
+        m_capacity = std::exchange(other.m_capacity, 0);
+        m_vec = std::exchange(other.m_vec, nullptr);
+    }
     return *this;
 }
 
@@ -286,7 +288,8 @@ bool operator==(const vector<U>& lhs, const vector<U>& rhs)
 }
 
 template <typename T>
-void vector<T>::realloc(size_type new_cap){
+void vector<T>::realloc(size_type new_cap)
+{
     if(new_cap == 0){
         new_cap = 1;
     }
@@ -303,10 +306,23 @@ void vector<T>::realloc(size_type new_cap){
 }
 
 template <typename T>
-void vector<T>::copy(const vector<T>& other){
+void vector<T>::copy(const vector<T>& other)
+{
     for(int i{0};i < m_size; ++i){
         m_vec[i] = other.m_vec[i];
     }
+}
+
+template <typename T>
+typename vector<T>::vector_iterator vector<T>::begin()
+{
+    return vector_iterator(m_vec);
+}
+
+template <typename T>
+typename vector<T>::vector_iterator vector<T>::end()
+{
+    return vector_iterator(m_vec + m_size);
 }
 
 #endif
