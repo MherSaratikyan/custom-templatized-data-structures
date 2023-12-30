@@ -95,11 +95,20 @@ int main(){
     printInfo(vec_d);
 
     std::cout<<"\n\nTesting iterators\n\n";
+    std::cout<<"\nTesting begin() and end()\n";
     vector<char> vec_it{'a','b','c','d','e','f','g','h'};
     auto iter = vec_it.begin();
     while(iter != vec_it.end()){
         std::cout<<(*iter)<<' ';
         ++iter;
+    }
+
+    std::cout<<"\nTesting cbegin() and cend()\n";
+    auto citer = vec_it.cend();
+    while(citer > vec_it.cbegin()){
+        --citer;
+        std::cout<<(*citer)<<' ';
+        
     }
 
 }
