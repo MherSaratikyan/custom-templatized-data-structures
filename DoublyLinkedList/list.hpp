@@ -75,7 +75,7 @@ public:
 
 private:
     void copy(const list& other);
-    list_node* getNewNode(const T& val);
+    list_node* getNewNode(const T& val) const;
 
 private:
     list_node* m_head{nullptr};
@@ -150,11 +150,11 @@ public:
         return old;
     }
 
-    friend bool operator==(const const_list_iterator& it1, const const_list_iterator it2){
+    friend bool operator==(const const_list_iterator it1, const const_list_iterator it2){
         return it1.m_ptr == it2.m_ptr;
     }
 
-    friend bool operator!=(const const_list_iterator& it1, const const_list_iterator& it2){
+    friend bool operator!=(const const_list_iterator it1, const const_list_iterator it2){
         return it1.m_ptr != it2.m_ptr;
     }
 

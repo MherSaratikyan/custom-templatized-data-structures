@@ -228,7 +228,7 @@ void list<T>::copy(const list<T>& other){
 }
 
 template <typename T>
-typename list<T>::list_node* list<T>::getNewNode(const T& val){
+typename list<T>::list_node* list<T>::getNewNode(const T& val) const{
     list_node* newNode = new list_node(val);
     return newNode;
 }
